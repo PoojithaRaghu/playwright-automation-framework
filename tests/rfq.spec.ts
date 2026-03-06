@@ -27,9 +27,9 @@ test.describe("Propel website", () => {
         await rfqpage.searchrfq.click();
         await rfqpage.photographsOption.click();   
         await attachmentpage.uploadpage().uploadfile(path.join(__dirname,'../datas/image.png'));
-        await expect(page.locator('svg[data-icon="download"]')).toBeVisible();
+        await expect(page.locator('svg[data-icon="download"]')).toBeVisible({timeout: 5000});
         //await page.locator('svg[data-icon="download"]').click();
-        await page.waitForTimeout(2000);    
+        //await page.waitForTimeout(2000);    
 
 
    
