@@ -1,14 +1,16 @@
 import {test, expect} from '@playwright/test';
 import rfqPage from './pages/rfq.page';
 import path from 'path';
+import attachmentPage from './pages/attachment.page';
 
 
 test.describe('loginpo', () => {
     
     
     test('pocreation', async ({ page }) => {
-        let rfqpage : rfqPage;
-        rfqpage = new rfqPage(page);
+        const rfqpage = new rfqPage(page);
+        const attachmentpage = new attachmentPage(page);
+
         
 
         await page.goto("https://svm-propel.com/auth");
@@ -26,6 +28,8 @@ test.describe('loginpo', () => {
         await rfqpage.editbuttonclick();
         await page.getByRole('combobox', { name: 'Search' }).nth(2)
         await page.getByText('Photographs').click();
+        await attachmentpage.uploadpage().uploadfile(path.join(__dirname,'../datas/image.png'));
+        await expect(page.locator('svg[data-icon="download"]')).toBeVisible({timeout: 5000});
         
         
 
