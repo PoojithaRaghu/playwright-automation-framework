@@ -6,6 +6,7 @@ import attachmentPage from './pages/attachment.page';
 
 test.describe("Propel website", () => {
 
+
     test("loginpage", async ({page}) => {
         
         const rfqpage = new rfqPage(page);
@@ -28,39 +29,6 @@ test.describe("Propel website", () => {
         await rfqpage.photographsOption.click();   
         await attachmentpage.uploadpage().uploadfile(path.join(__dirname,'../datas/image.png'));
         await expect(page.locator('svg[data-icon="download"]')).toBeVisible({timeout: 5000});
-        await rfqpage.deliverydetailsclick();
-        await rfqpage.confirmclick();
-        await rfqpage.fillLeaddays('10');
-        await rfqpage.currencyclick();
-        await page.keyboard.type('Indian rupee');
-        await page.keyboard.press('Enter');
-        await rfqpage.itemdetailsclick();
-        //await rfqpage.confirmclick();
-        await rfqpage.checkcurrencyclick();
-        await rfqpage.yettoquoteclick();
-const rows = page.locator('tr', { hasText: 'Yet To Quote' });
-
-const count = await rows.count();
-
-for (let i = 0; i < Math.min(3, count); i++) {
-
-  // Click edit button for that row
-  await rows.nth(i).getByRole('button', { name: 'edit' }).click();
-
-  // Fill quotation fields
-  await page.getByRole('spinbutton', { name: 'Quoted Quantity *' }).fill('64');
-  await page.getByRole('spinbutton', { name: 'Unit Price *' }).fill('34');
-  await page.getByRole('spinbutton', { name: 'Disc (%)' }).fill('2');
-
-  // Example save button (if present)
-  await page.getByRole('button', { name: 'Save' }).click();
-  
-
-  // Wait for table to appear again before next iteration
-  //await page.waitForLoadState('networkidle');
-}
-
-
         //await page.locator('svg[data-icon="download"]').click();
         //await page.waitForTimeout(2000);    
 

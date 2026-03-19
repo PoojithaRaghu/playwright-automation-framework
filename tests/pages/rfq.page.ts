@@ -13,7 +13,13 @@
     editrfq: Locator;
     searchrfq: Locator;
     photographsOption: Locator;
-    
+    deliverydetails: Locator;
+    leaddays: Locator;
+    currency: Locator;
+    Itemdetails: Locator;   
+    confirm: Locator;
+    checkcurrency: Locator;
+    yettoquote: Locator;
 
     constructor(page: Page){
     this.page = page;
@@ -29,6 +35,15 @@
         this.editrfq = page.locator('svg[data-icon="edit"]').nth(1)
         this.searchrfq = page.getByRole('combobox', { name: 'Search' }).nth(1)
         this.photographsOption = page.getByText('Photographs')
+        this.deliverydetails = page.getByText('Delivery Details', { exact: true })
+        this.leaddays = page.getByRole('spinbutton', { name: 'Lead Time Days *' })
+        this.currency = page.locator('span.ant-select-selection-item')
+        this.Itemdetails = page.getByText('Item Details', { exact: true })
+        this.confirm = page.getByText('Confirm', { exact: true })
+        this.checkcurrency = page.locator('span.ant-select-selection-item', { hasText: 'INDIAN RUPEE' })
+        this.yettoquote = page.getByText('Yet To Quote', { exact: true })
+
+        
     }   
 
     async signinbtnclick(){
@@ -64,9 +79,28 @@
     async photographsoptionclick(){
         await this.photographsOption.click();
     }
+    async deliverydetailsclick(){
+        await this.deliverydetails.click();
+    }
+    async fillLeaddays(value: string){
+        await this.leaddays.fill(value);
+    }
+    async currencyclick(){
+        await this.currency.click();
+    }
 
+    async itemdetailsclick(){
+        await this.Itemdetails.click();
+    }
 
-   
-
+    async confirmclick(){
+        await this.confirm.click();
+    }
+    async checkcurrencyclick(){
+        await this.checkcurrency.waitFor({state: 'visible'});
+    }
+    async yettoquoteclick(){
+        await this.yettoquote.click();
+    }
 }
 
