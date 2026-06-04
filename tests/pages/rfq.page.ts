@@ -20,6 +20,7 @@
     confirm: Locator;
     checkcurrency: Locator;
     yettoquote: Locator;
+    rfqno: Locator;
 
     constructor(page: Page){
     this.page = page;
@@ -42,8 +43,8 @@
         this.confirm = page.getByText('Confirm', { exact: true })
         this.checkcurrency = page.locator('span.ant-select-selection-item', { hasText: 'INDIAN RUPEE' })
         this.yettoquote = page.getByText('Yet To Quote', { exact: true })
-
-        
+        this.rfqno = page.getByLabel('RFQ No Filter Input')
+                
     }   
 
     async signinbtnclick(){
@@ -88,7 +89,6 @@
     async currencyclick(){
         await this.currency.click();
     }
-
     async itemdetailsclick(){
         await this.Itemdetails.click();
     }
@@ -102,5 +102,9 @@
     async yettoquoteclick(){
         await this.yettoquote.click();
     }
+    async rfqnoclick(){
+        await this.rfqno.click();
+    }
+
 }
 
